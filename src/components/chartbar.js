@@ -10,7 +10,14 @@ function average(data){
   });
   return _.round(temp/data[0].points.length);
 }
+
 export default function(props){
+  var today = new Date();
+  props.data[0].points.map((obj) => {
+    var newDate = new Date(today);
+    newDate.setDate(newDate.getDate() + obj.x);
+    obj.x = newDate.getDate();
+  });
   return (
     <div>
       <LineChart
@@ -21,7 +28,7 @@ export default function(props){
       height={300}
       data={props.data}
       />
-      <div>{average(props.data)}</div>
+      <div>AVG : {average(props.data)} {props.units}</div>
     </div>
   );
 }

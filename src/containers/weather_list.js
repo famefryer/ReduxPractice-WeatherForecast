@@ -5,7 +5,7 @@ import ChartBar from '../components/chartbar'
 class WeatherList extends Component {
   renderWeather(cityData){
     //temperature is an array
-    const temperature = cityData.list.map(weather => weather.main.temp);
+    const temperature = cityData.list.map(weather => weather.main.temp - 273);
     const pressure = cityData.list.map(weather => weather.main.pressure);
     const name = cityData.city.name;
     const humidity = cityData.list.map(weather => weather.main.humidity);
@@ -34,13 +34,13 @@ class WeatherList extends Component {
       <tr key={name}>
         <td>{name}</td>
         <td>
-          <ChartBar id={`${name}1`} data={dataTemp} yLabel="temperature" />
+          <ChartBar id={`${name}1`} data={dataTemp} yLabel="temperature" units="C" />
         </td>
         <td>
-          <ChartBar id={`${name}2`} data={dataPress} yLabel="pressure" />
+          <ChartBar id={`${name}2`} data={dataPress} yLabel="pressure" units="hPa "/>
         </td>
         <td>
-          <ChartBar id={`${name}3`} data={dataHum} yLabel="humidity" />
+          <ChartBar id={`${name}3`} data={dataHum} yLabel="humidity" units="%" />
         </td>
       </tr>
     );
@@ -51,9 +51,9 @@ class WeatherList extends Component {
       <thead>
           <tr>
             <th>City</th>
-            <th>Temperature</th>
-            <th>Pressure</th>
-            <th>Humidity</th>
+            <th>Temperature(C)</th>
+            <th>Pressure(hPa)</th>
+            <th>Humidity(%)</th>
           </tr>
         </thead>
         <tbody>
